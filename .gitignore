@@ -1,0 +1,6 @@
+node_modules/
+*.mp4
+*.mkv
+cine_cache.json
+.system_generated/
+.DS_Store

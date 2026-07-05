@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineSync - Movie Resolution Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="glass-bg"></div>
+  
+  <div class="app-container">
+    <header class="app-header">
+      <div class="logo-area">
+        <i class="fa-solid fa-clapperboard logo-icon"></i>
+        <div>
+          <h1>CineSync</h1>
+          <p>Local Movie Scanner & Resolution Upgrader</p>
+        </div>
+      </div>
+      <div class="scan-control">
+        <div class="input-wrapper">
+          <i class="fa-regular fa-folder-open input-icon"></i>
+          <input type="text" id="scan-path-input" placeholder="Enter absolute folder path...">
+          <button id="browse-btn" class="browse-icon-btn" title="Choose folder...">
+            <i class="fa-regular fa-folder-closed"></i>
+          </button>
+        </div>
+        <button id="scan-btn" class="btn btn-primary">
+          <i class="fa-solid fa-arrows-rotate"></i> Scan Folder
+        </button>
+      </div>
+    </header>
+
+    <!-- Stat Dashboard Cards -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon-wrapper blue">
+          <i class="fa-solid fa-film"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="stat-total-movies">0</h3>
+          <p>Total Movies Found</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon-wrapper green">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="stat-upgradable">0</h3>
+          <p>Upgrades Available</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon-wrapper purple">
+          <i class="fa-solid fa-hard-drive"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="stat-storage">0 GB</h3>
+          <p>Local Storage Used</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="filter-bar">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="search-input" placeholder="Search scanned movies...">
+      </div>
+      <div class="filter-options">
+        <div class="select-wrapper">
+          <i class="fa-solid fa-sliders select-icon"></i>
+          <select id="resolution-filter" class="filter-select">
+            <option value="all">All Resolutions</option>
+            <option value="2160p">2160p (4K)</option>
+            <option value="1080p">1080p (FHD)</option>
+            <option value="720p">720p (HD)</option>
+            <option value="sd">SD (< 720p)</option>
+          </select>
+        </div>
+        <button id="filter-all" class="filter-tab active">All Movies</button>
+        <button id="filter-upgrades" class="filter-tab">
+          <i class="fa-solid fa-sparkles"></i> Upgrade Available
+        </button>
+      </div>
+    </section>
+
+    <!-- Main Movie List Table -->
+    <main class="table-container" id="movie-container">
+      <table class="movie-table">
+        <thead>
+          <tr>
+            <th>Movie Cover & Details</th>
+            <th>Resolution</th>
+            <th>Duration</th>
+            <th>File Info</th>
+            <th>YTS Upgrade Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="movie-tbody">
+          <tr>
+            <td colspan="6" class="loading-state">
+              <i class="fa-solid fa-circle-notch fa-spin spinner"></i>
+              <p>Awaiting folder scan. Click "Scan Folder" above to begin.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+
+    <!-- Manual Match Modal -->
+    <div class="modal" id="search-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Fix YTS Match</h2>
+          <span class="close-btn" id="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+          <p>Adjust the search parameters for file: <strong id="modal-filename"></strong></p>
+          <div class="form-group">
+            <label for="modal-title-input">Movie Title</label>
+            <input type="text" id="modal-title-input">
+          </div>
+          <div class="form-group">
+            <label for="modal-year-input">Release Year (Optional)</label>
+            <input type="number" id="modal-year-input" min="1900" max="2100">
+          </div>
+          <button id="modal-search-btn" class="btn btn-primary btn-block">Search & Rematch</button>
+          
+          <div id="modal-results" class="modal-results-area">
+            <!-- Dynamic results go here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

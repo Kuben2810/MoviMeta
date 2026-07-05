@@ -1,0 +1,13 @@
+{
+  "name": "movie-resolution-scanner",
+  "version": "1.0.0",
+  "description": "Scans local folder, extracts video resolution, and checks YTS for upgrade suggestions",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "axios": "^1.7.2"
+  }
+}
